@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Markdig.Blazor", "Markdig.Blazor.csproj", "{3C7F2995-C6AF-4320-BD19-034A84DB22B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Markdig.Blazor.Web", "Markdig.Blazor.Web\Markdig.Blazor.Web.csproj", "{BA03429B-CDCE-406A-ABE6-7480AF60905E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C7F2995-C6AF-4320-BD19-034A84DB22B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C7F2995-C6AF-4320-BD19-034A84DB22B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C7F2995-C6AF-4320-BD19-034A84DB22B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C7F2995-C6AF-4320-BD19-034A84DB22B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA03429B-CDCE-406A-ABE6-7480AF60905E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA03429B-CDCE-406A-ABE6-7480AF60905E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA03429B-CDCE-406A-ABE6-7480AF60905E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA03429B-CDCE-406A-ABE6-7480AF60905E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>disable</Nullable>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Markdig" Version="0.33.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0-rc.1.23421.29"/>
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Compile Remove="Markdig.Blazor.Web\**" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <EmbeddedResource Remove="Markdig.Blazor.Web\**" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <None Remove="Markdig.Blazor.Web\**" />
+    </ItemGroup>
+
+</Project>

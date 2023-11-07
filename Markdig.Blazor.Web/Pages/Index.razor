@@ -1,0 +1,30 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+<h2>Test below:</h2>
+
+@MarkdownFragment
+
+<InputTextArea  @bind-Value="@_input"></InputTextArea>
+
+@code {
+
+    private string _input = "";
+    
+    private string Input
+    {
+        get => _input;
+        set
+        {
+            _input = value; 
+            StateHasChanged();
+        }
+    }
+    
+    public RenderFragment MarkdownFragment => builder =>
+    {   
+        var pipeline = new MarkdownPipelineBuilder().Build();
+        Markdown.RenderToFragment(_input, builder, pipeline);
+    };
+}
