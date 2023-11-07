@@ -36,6 +36,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
 
 <script>
+    // This prevents the highlighting from breaking the Blazor component by safely cloning the element and hiding the original
     function hljsHighlight(el){
         const prior = el.parentElement.querySelector('.hljs-clone');
         if (prior) {
