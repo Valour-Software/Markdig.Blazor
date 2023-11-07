@@ -26,9 +26,6 @@ public class CodeBlockRenderer : BlazorObjectRenderer<CodeBlock>
         public IJSRuntime JsRuntime { get; set; }
         
         [Parameter]
-        public BlazorRenderer Renderer { get; set; }
-        
-        [Parameter]
         public CodeBlock Content { get; set; }
         
         [Parameter]
@@ -53,7 +50,10 @@ public class CodeBlockRenderer : BlazorObjectRenderer<CodeBlock>
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            await JsRuntime.InvokeVoidAsync("hljsHighlight", _codeBlock);
+            if (AutoHighlight)
+            {
+                await JsRuntime.InvokeVoidAsync("hljsHighlight", _codeBlock);
+            }
         }
 
         public void WriteLeafRawLines(RenderTreeBuilder builder, LeafBlock leafBlock)
@@ -99,7 +99,7 @@ public class CodeBlockRenderer : BlazorObjectRenderer<CodeBlock>
         else
         {
             renderer.OpenComponent<CodeBlockComponent>()
-                .AddComponentParam("Renderer", renderer)
+                .AddComponentParam("AutoHighlight", renderer.EnableHljsHighlight)
                 .AddComponentParam("Content", obj)
                 .CloseComponent();
         }
