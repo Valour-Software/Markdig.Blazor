@@ -37,6 +37,8 @@ public class BlazorRenderer : RendererBase
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.Inlines.CodeInlineRenderer());
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.Inlines.DelimiterInlineRenderer());
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.Inlines.LineBreakInlineRenderer());
+        
+        ObjectRenderers.Add(new Markdig.Blazor.Renderers.Extensions.TableRenderer());
     }
     
     public void SetBuilder(RenderTreeBuilder builder)
