@@ -45,7 +45,7 @@
         
         const clone = el.cloneNode(true);
         clone.classList.add('hljs-clone');
-        clone.style.display = 'unset';
+        clone.style.display = 'inherit';
         hljs.highlightElement(clone);
         
         el.parentElement.insertBefore(clone, el.nextSibling);
