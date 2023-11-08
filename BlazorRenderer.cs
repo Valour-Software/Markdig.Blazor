@@ -28,6 +28,7 @@ public class BlazorRenderer : RendererBase
         
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.Inlines.LiteralInlineRenderer());
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.Inlines.EmphasisInlineRenderer());
+        ObjectRenderers.Add(new Markdig.Blazor.Renderers.Inlines.CodeInlineRenderer());
     }
     
     public void SetBuilder(RenderTreeBuilder builder)
@@ -41,12 +42,17 @@ public class BlazorRenderer : RendererBase
         Write(markdownObject);
         return _builder;
     }
+
+    public BlazorRenderer AddMarkupContent(string content, int seq = 0)
+    {
+        _builder.AddMarkupContent(seq, content);
+        return this;
+    }
     
-    public BlazorRenderer OpenElement(string tag)
+    public BlazorRenderer OpenElement(string tag, int seq = 0)
     {
         // Console.WriteLine("Opening element: " + tag);
-
-        _builder.OpenElement(0, tag);
+        _builder.OpenElement(seq, tag);
         return this;
     }
 
@@ -127,33 +133,22 @@ public class BlazorRenderer : RendererBase
         return this;
     }
     
-    public BlazorRenderer WriteLeafRawLines(LeafBlock leafBlock, bool writeEndOfLines, bool escape, bool softEscape = false)
+    public BlazorRenderer WriteLeafRawLines(LeafBlock leafBlock)
     {
-        if (leafBlock is null) throw new ArgumentNullException(nameof(leafBlock));
-
-        var slices = leafBlock.Lines.Lines;
-        if (slices is not null)
+        if (leafBlock == null) throw new ArgumentNullException(nameof(leafBlock));
+        if (leafBlock.Lines.Lines != null)
         {
-            for (int i = 0; i < slices.Length; i++)
+            var lines = leafBlock.Lines;
+            var slices = lines.Lines;
+            for (var i = 0; i < lines.Count; i++)
             {
-                ref StringSlice slice = ref slices[i].Slice;
-                if (slice.Text is null)
+                if (i != 0)
                 {
-                    break;
+                    _builder.OpenElement(0, "br");
+                    _builder.CloseElement();
                 }
 
-                if (!writeEndOfLines && i > 0)
-                {
-                    _builder.AddContent(0, "\n");
-                }
-
-                ReadOnlySpan<char> span = slice.AsSpan();
-                _builder.AddContent(1, span.ToString());
-
-                if (writeEndOfLines)
-                {
-                    _builder.AddContent(2, "\n");
-                }
+                WriteText(ref slices[i].Slice);
             }
         }
 
@@ -173,8 +168,8 @@ public class BlazorRenderer : RendererBase
     public void WriteText(string text)
     {
         _builder.AddContent(0, text);
-        _builder.OpenElement(1, "br");
-        _builder.CloseElement();
+        //_builder.OpenElement(1, "br");
+        //_builder.CloseElement();
     }
     
     public void WriteInline(Inline inline)

@@ -45,10 +45,10 @@
         
         const clone = el.cloneNode(true);
         clone.classList.add('hljs-clone');
-        clone.style.display = 'block';
+        clone.style.display = 'unset';
         hljs.highlightElement(clone);
         
-        el.parentElement.appendChild(clone);
+        el.parentElement.insertBefore(clone, el.nextSibling);
         el.style.display = 'none';
     }
 </script>
