@@ -11,8 +11,8 @@ public class ParagraphRenderer : BlazorObjectRenderer<ParagraphBlock>
         if (renderer == null) throw new ArgumentNullException(nameof(renderer));
         if (obj == null) throw new ArgumentNullException(nameof(obj));
         
-        renderer.OpenElement("p", 1)
-            .AddAttributes(obj.TryGetAttributes())
+        renderer.OpenElement("p", 0)
+            .AddAttributes(obj.TryGetAttributes(), 1)
             .WriteLeafInline(obj)
             .CloseElement();
     }

@@ -24,7 +24,7 @@
     
     public RenderFragment MarkdownFragment => builder =>
     {   
-        var pipeline = new MarkdownPipelineBuilder().DisableHtml().Build();
+        var pipeline = new MarkdownPipelineBuilder().DisableHtml().UseAdvancedExtensions().Build();
         Markdown.RenderToFragment(_input, builder, pipeline);
     };
 }

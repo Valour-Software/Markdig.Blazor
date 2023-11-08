@@ -27,6 +27,8 @@ public class BlazorRenderer : RendererBase
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.CodeBlockRenderer());
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.HeadingRenderer());
         
+        ObjectRenderers.Add(new Markdig.Blazor.Renderers.Inlines.LinkInlineRenderer());
+        ObjectRenderers.Add(new Markdig.Blazor.Renderers.Inlines.AutolinkInlineRenderer());
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.Inlines.LiteralInlineRenderer());
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.Inlines.EmphasisInlineRenderer());
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.Inlines.CodeInlineRenderer());
@@ -75,13 +77,13 @@ public class BlazorRenderer : RendererBase
         return this;
     }
 
-    public BlazorRenderer AddAttribute(string name, string content)
+    public BlazorRenderer AddAttribute(string name, string content, int seq = 0)
     {
-        _builder.AddAttribute(0, name, content);
+        _builder.AddAttribute(seq, name, content);
         return this;
     }
 
-    public BlazorRenderer AddAttributes(HtmlAttributes attributes)
+    public BlazorRenderer AddAttributes(HtmlAttributes attributes, int seq = 0)
     {
         if (attributes is null)
             return this;
@@ -100,14 +102,16 @@ public class BlazorRenderer : RendererBase
                 classes += attributes.Classes[i];
             }
 
-            _builder.AddAttribute(1, "class", classes);
+            _builder.AddAttribute(seq, "class", classes);
+            seq++;
         }
 
         if (attributes.Properties is not null && attributes.Properties.Count > 0)
         {
             foreach (var property in attributes.Properties)
             {
-                _builder.AddAttribute(2, property.Key, property.Value);
+                _builder.AddAttribute(seq, property.Key, property.Value);
+                seq++;
             }
         }
 
@@ -166,11 +170,13 @@ public class BlazorRenderer : RendererBase
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void WriteText(string text)
+    public BlazorRenderer WriteText(string text, int seq = 0)
     {
-        _builder.AddContent(0, text);
+        _builder.AddContent(seq, text);
         //_builder.OpenElement(1, "br");
         //_builder.CloseElement();
+
+        return this;
     }
     
     public void WriteInline(Inline inline)
