@@ -25,6 +25,7 @@ public class BlazorRenderer : RendererBase
         
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.ParagraphRenderer());
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.CodeBlockRenderer());
+        ObjectRenderers.Add(new Markdig.Blazor.Renderers.HeadingRenderer());
         
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.Inlines.LiteralInlineRenderer());
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.Inlines.EmphasisInlineRenderer());
@@ -122,7 +123,7 @@ public class BlazorRenderer : RendererBase
     public BlazorRenderer WriteLeafInline(LeafBlock leafBlock)
     {
         if (leafBlock is null) throw new ArgumentNullException(nameof(leafBlock));
-        var inline = (Syntax.Inlines.Inline)leafBlock.Inline;
+        Inline inline = leafBlock.Inline;
         
         while (inline != null)
         {

@@ -10,7 +10,7 @@
 
 @code {
 
-    private string _input = "";
+    private string _input = "hello \n there";
     
     private string Input
     {
@@ -24,7 +24,7 @@
     
     public RenderFragment MarkdownFragment => builder =>
     {   
-        var pipeline = new MarkdownPipelineBuilder().Build();
+        var pipeline = new MarkdownPipelineBuilder().DisableHtml().Build();
         Markdown.RenderToFragment(_input, builder, pipeline);
     };
 }
