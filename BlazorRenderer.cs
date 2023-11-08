@@ -27,6 +27,7 @@ public class BlazorRenderer : RendererBase
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.CodeBlockRenderer());
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.HeadingRenderer());
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.QuoteBlockRenderer());
+        ObjectRenderers.Add(new Markdig.Blazor.Renderers.ThematicBreakRenderer());
         
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.Inlines.LinkInlineRenderer());
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.Inlines.AutolinkInlineRenderer());
