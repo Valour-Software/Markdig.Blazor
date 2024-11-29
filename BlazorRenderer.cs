@@ -16,6 +16,7 @@ public class BlazorRenderer : RendererBase
     private char[] buffer;
 
     public bool EnableHljsHighlight { get; set; }
+    public object RenderContext { get; private set; }
     
     public BlazorRenderer(RenderTreeBuilder builder, bool enableHljsHighlight = true)
     {
@@ -39,6 +40,11 @@ public class BlazorRenderer : RendererBase
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.Inlines.LineBreakInlineRenderer());
         
         ObjectRenderers.Add(new Markdig.Blazor.Renderers.Extensions.TableRenderer());
+    }
+    
+    public void SetContext(object context)
+    {
+        RenderContext = context;
     }
     
     public void SetBuilder(RenderTreeBuilder builder)

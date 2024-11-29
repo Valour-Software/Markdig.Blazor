@@ -11,11 +11,13 @@ public static partial class Markdown
     /// <param name="builder">The render tree to render to</param>
     /// <param name="pipeline">The pipeline used for the conversion</param>
     /// <param name="renderer">The renderer used</param>
+    /// <param name="renderContext">The render context. Will be passed through rendering flow.</param>
     public static void RenderToFragment(
         string markdown, 
         RenderTreeBuilder builder, 
         MarkdownPipeline pipeline = null, 
-        BlazorRenderer renderer = null)
+        BlazorRenderer renderer = null,
+        object renderContext = null)
     {
         if (markdown is null) 
             throw new ArgumentNullException(nameof(markdown));
@@ -26,6 +28,8 @@ public static partial class Markdown
             renderer = new BlazorRenderer(builder);
         else
             renderer.SetBuilder(builder);
+        
+        renderer.SetContext(renderContext);
         
         pipeline.Setup(renderer);
         
